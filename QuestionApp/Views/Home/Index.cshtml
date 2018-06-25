@@ -1,0 +1,56 @@
+﻿@{ 
+    ViewData["Title"] = "Dominic's Question App";
+}
+<h1 class="display-1">Welcome to Dominic's Question App</h1>
+
+<h6>Please select each question below and provide comments if you wish!</h6>
+<br /><br />
+<div ng-controller="QuestionController">
+    <div class="form-group">
+        <label for="fullName">Your Name</label>
+        <input ng-model="fullName" class="form-control" id="fullName" />
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input ng-model="emailAddress" class="form-control" id="email" />
+    </div>
+    <br />
+    <div id="accordion">
+        <div ng-repeat="question in questions">
+            <hr />
+            <div class="card">
+                <div class="card-header" id="heading{{question.id}}">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse{{question.id}}" aria-expanded="false" aria-controls="collapse{{question.id}}">
+                            {{question.questionText}}
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapse{{question.id}}" class="collapse" aria-labelledby="heading{{question.id}}" data-parent="#accordion">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="answer{{question.id}}">Answer:</label>
+                            <p id="answer{{question.id}}" class="alert alert-info">{{question.answer}}</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="comment{{question.id}}">Your Comments:</label>
+                            <textarea ng-model="question.commentText" class="form-control" id="comment{{question.id}}" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <br />
+    <br />
+
+    <div class="row">
+        <div class="col-lg-3">
+            <button ng-click="saveSubmission(questions)"  class="btn btn-primary" type="button">Submit Comments</button>
+        </div>
+    </div>
+
+</div>
